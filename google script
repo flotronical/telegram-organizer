@@ -1,0 +1,157 @@
+var token = "441142364:AAEVEVAfNVIAmt5hPc8JroUOWZtGqDS-0o4";
+var telegramUrl = "https://api.telegram.org/bot" + token;
+var webAppUrl = "https://script.google.com/macros/s/AKfycbwLoIoOkV7W-zsw-jPauaHwv6tHFwAe8eAibxWR0nRb5qj5n_0/exec";
+var ssId = "1bbE59bR5MOyC6VYU-bir7d4n4j8ES_1Z6di3W_1XFGI";
+
+function getMe() {
+  var url = telegramUrl + "/getMe";
+  var response = UrlFetchApp.fetch(url);
+  Logger.log(response.getContentText());
+}
+
+function setWebhook() {
+  var url = telegramUrl + "/setWebhook?url=" + webAppUrl;
+  var response = UrlFetchApp.fetch(url);
+  Logger.log(response.getContentText());
+}
+
+function sendText(id,text) {
+  var url = telegramUrl + "/sendMessage?chat_id=" + id + "&text=" + text;
+  var response = UrlFetchApp.fetch(url);
+  Logger.log(response.getContentText());
+}
+
+function doGet(e) {
+  return HtmlService.createHtmlOutput("Hi there");
+}
+
+function doPost(e) {
+  // this is where telegram works
+  var data = JSON.parse(e.postData.contents);
+  var text = data.message.text;
+  var id = data.message.chat.id;
+  var name = data.message.chat.first_name;
+  var answer = "Hi " + "human," + " thank you for your message!  I'll add that information to the spreadsheet.";
+  //sendText(text," =message");
+
+  
+  
+  SpreadsheetApp.openById(ssId).getSheets()[0].appendRow([new Date(),text]);
+  //SpreadsheetApp.openById(ssId).getSheets()[0].appendRow([new Date(),id,name,text,answer]);
+  
+  if(/@news/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  
+  else if(/@suggestion/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  
+  else if(/@research/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  
+  else if(/@taxes/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  
+  else if(/@funny/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  
+  else if(/@gifs/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+
+  else if(/@News/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  
+  else if(/@Suggestion/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  
+  else if(/@Research/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  
+  else if(/@Taxes/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  
+  else if(/@Funny/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  
+  else if(/@Gifs/.test(text)) {
+    var sheetName = text.slice(1).split(" ")[0];
+    var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+    var comment = text.split(" ").slice(1).join(" ");
+    sheet.appendRow([new Date(),comment]);
+    sendText(id,answer);
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+  }
+  //if(/^#/.test(text)) {
+   // var sheetName = text.slice(1).split(" ")[0];
+   // var sheet = SpreadsheetApp.openById(ssId).getSheetByName(sheetName) ? SpreadsheetApp.openById(ssId).getSheetByName(sheetName) : SpreadsheetApp.openById(ssId).insertSheet(sheetName);
+   // var comment = text.split(" ").slice(1).join(" ");
+    //sheet.appendRow([new Date(),id,name,comment,answer]);
+   // var answer = "Hi " + name + ", thank you for your hashtag " + text;
+
+  //}
+}
